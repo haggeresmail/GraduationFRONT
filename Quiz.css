@@ -1,0 +1,89 @@
+src/components/QuestionForm.css
+
+.question-form {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 24px;
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .question-label {
+    display: block;
+    margin-bottom: 12px;
+  }
+  
+  .question-input,
+  .option-input,
+  .answer-select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 4px;
+    font-size: 14px;
+  }
+  
+  .options-container {
+    margin-top: 16px;
+  }
+  
+  .option-label {
+    display: block;
+    margin-bottom: 12px;
+  }
+  
+  .answer-label {
+    display: block;
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+  
+  .answer-select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+  }
+  
+  .save-button,
+  .cancel-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 10px;
+  }
+  
+  .save-button {
+    background-color: #4caf50;
+    color: white;
+    
+  }
+  
+  .save-button:hover {
+    background-color: #45a049;
+  }
+  
+  .cancel-button {
+    background-color: #ccc;
+    color: #333;
+    margin-left: 8px;
+  }
+  
+  .cancel-button:hover {
+    background-color: #bbb;
+  }
+  .button-spacing {
+    margin-right: 10px;
+  }
+  

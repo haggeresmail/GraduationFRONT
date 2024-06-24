@@ -1,0 +1,57 @@
+/* src/components/CourseMaterials.css */
+.course-materials-container {
+  text-align: center;
+  margin: 170px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  min-height: 500px; /* تحديد ارتفاع أدنى */
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.material-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  width: 300px;
+  display: inline-block;
+}
+
+.material-button:hover {
+  background-color: #0056b3;
+}
+
+.material-button:active {
+  background-color: #004494;
+}
+
+.material-button svg {
+  margin-right: 10px; /* Increase space between icon and text */
+  font-size: 30px; 
+  vertical-align: middle;
+ 
+}
+
+/* .material-button span {
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 2px; /* Increase space between icon and text */
+/* }  */
