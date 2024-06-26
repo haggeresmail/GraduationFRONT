@@ -97,7 +97,7 @@ body {
     background-color: #4082f3;
     color: white;
     cursor: pointer;
-    width: 100px;
+    width: 200px;
     /* justify-content: space-between; 
      display: flex;padding-top: 10px;padding-bottom: 10px; */
   }
@@ -111,5 +111,5 @@ body {
     display: flex;align-items: center;width: 100vh;
   } 
   .textareaquiz{
-    display: flex;align-items: center;width: 100vh;
+    display: flex;align-items: center;width: 110vh;
   }
