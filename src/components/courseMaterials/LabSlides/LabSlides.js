@@ -24,7 +24,7 @@ const LabSlides = () => {
                 <h1>Lab Slides</h1>
                 <div>
                     {slides.map((slides) => (
-                        <button
+                        <button className='buttonsonother'
                             key={slides.id}
                             type='button'
                             onClick={() => handleViewSlides(slides.id)}

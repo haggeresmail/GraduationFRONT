@@ -1,39 +1,3 @@
-// // //*******************bBANKTest */
-// // import React, { useState } from 'react';
-// // s
-// // import './App.css';
-
-
-
-// // const App = () => {
-// //   const [questions, setQuestions] = useState([]);
-
-// //   const addQuestion = (question) => {
-// //     setQuestions([...questions, question]);
-// //   };
-
-// //   const deleteQuestion = (index) => {
-// //     setQuestions(questions.filter((_, i) => i !== index));
-// //   };
-
-// //   const editQuestion = (index, updatedQuestion) => {
-// //     const newQuestions = questions.map((question, i) => 
-// //       i === index ? updatedQuestion : question
-// //     );
-// //     setQuestions(newQuestions);
-// //   };
-
-// //   return (
-// //     <div>
-    
-// //       <QuestionForm addQuestion={addQuestion} />
-// //       <Quiz questions={questions} deleteQuestion={(index) => deleteQuestion(index)} editQuestion={(index, updatedQuestion) => editQuestion(index, updatedQuestion)} />
-// //     </div>
-// //   );
-// // };
-
-// // export default App;
-
 
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -42,12 +6,12 @@ import Questions from "./components/TakeQuiz/Questions";
 // import "./index.css";
 import "./App.css";
 // import "./components/TakeQuiz/takequiz.css";
-import "./components/TakeQuiz/takequiz.css";
+// import "./components/TakeQuiz/takequiz.css";
 import Result from "./components/TakeQuiz/Result";
 import question from "./components/TakeQuiz/question";
 import QuestionForm from './components/QuestionForm';
 
-import Quiz from './components/Quiz';
+import Quiz from './components/AddedQuestion';
 import UploadMaterial from "./components/uploadmaterials/UploadMaterial";
 import CourseMaterials from "./components/courseMaterials/CourseMaterials";
 import RecordedLecture from './components/courseMaterials/RecordedLecture/RecordedLecture';

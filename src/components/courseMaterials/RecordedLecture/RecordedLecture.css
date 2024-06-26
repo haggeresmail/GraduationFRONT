@@ -18,15 +18,22 @@
   margin: 200px auto;
   display: flex;
   flex-direction: column;
-  justify-content: left; /* Center vertically */
-  align-items: left; /* Center horizontally */
-  min-height: 70vh; /* Adjust height as needed */
+  justify-content: left; 
+  align-items: left; 
+  min-height: 70vh; 
 }
-button {
+/* .buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+} */
+.buttonsonother {
   margin-top: 20px;
   padding: 10px 20px;
-  width: 200px; /* Fixed width */
-  height: 40px; /* Fixed height */
+  width: 200px; 
+  height: 40px; 
   border: none;
   border-radius: 4px;
   background-color: #007bff;
@@ -36,6 +43,8 @@ button {
   flex-direction: column;
   align-items: center;
   gap: 10px;
+
+  
 }
 
   

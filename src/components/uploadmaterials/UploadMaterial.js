@@ -81,7 +81,7 @@ const UploadMaterial = ({ courseId }) => {
           <input type="file" onChange={handleFileChange} />
           {file && <span className="file-input-label">{file.name}</span>}
         </div>
-        <button  className="submit" type="submit">Upload</button>
+        <button  className="upload" type="submit">Upload</button>
       </form>
 
       {showSecondaryForm && lastUploadedFile && (
@@ -97,8 +97,8 @@ const UploadMaterial = ({ courseId }) => {
             <label>Material Type:</label>
             <span>{lastUploadedFile.type}</span>
           </div>
-          <button type="button" onClick={() => handleDelete(lastUploadedFile.id)}>Delete</button>
-          <button type="submit">Send to Backend</button>
+          <button  className="upload" type="button" onClick={() => handleDelete(lastUploadedFile.id)}>Delete</button>
+          <button   className="upload" type="submit">Send to Backend</button>
         </form>
         </div>
       )}
@@ -118,7 +118,7 @@ const UploadMaterial = ({ courseId }) => {
               {/* {file.name}  */}
               {file.type}
             {/* </a> */}
-            <button onClick={() => handleDelete(file.id)}>Delete</button>
+            <button   className="upload" onClick={() => handleDelete(file.id)}>Delete</button>
           </li>
         ))}
       </ul>

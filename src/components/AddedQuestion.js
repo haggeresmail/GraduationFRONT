@@ -3,6 +3,8 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import "./AddedQuestion.css";
+//second  form created down the first form  for added question in testbank to be edited
 
 const Quiz = ({ questions, deleteQuestion, editQuestion }) => {
   const [isEditing, setIsEditing] = useState(null);
@@ -165,19 +167,23 @@ const Quiz = ({ questions, deleteQuestion, editQuestion }) => {
                     <p>Correct Answer: {question.correctAnswer}</p>
                     <p>Topic: {question.lesson || 'No lesson selected'}</p>
                     <p>Level of Difficulty: {question.difficulty === '1' ? 'Easy' : question.difficulty === '2' ? 'Medium' : 'Hard'}</p>
+                    <div class="button-container1">
                     <button className="button-spacing" onClick={() => handleEditClick(index)}>Edit Question</button>
                     <button className="button-spacing" onClick={() => handleDeleteClick(index)}>Delete Question</button>
-                    <button className="button-spacing" onClick={() => toggleVisibility(index)}>Save</button>
+                    </div>
+                    {/* <button className="button-spacing" onClick={() => toggleVisibility(index)}>Save</button> */}
                   </div>
                 )}
               </>
             )}
           </div>
         ))}
+        <div class="button-container">
         <button className="button-spacing" onClick={handleSubmit}>Submit </button>
-        <Link to="/">
-          <button className="btn btn-success px-4 py-2 fw-bold">Home</button>
-        </Link>
+        {/* <Link to="/">
+          <button >Home</button>
+        </Link> */}
+        </div>
       </div>
     </div>
   );

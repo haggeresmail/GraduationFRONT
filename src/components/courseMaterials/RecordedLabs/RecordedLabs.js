@@ -42,7 +42,7 @@ const RecordedLabs = ({ url }) => {
                 <h1>Recorded labs</h1>
                 <div>
                     {Labs.map((lab) => (
-                        <button
+                        <button className='buttonsonother'
                             key={lab.id}
                             type='button'
                             onClick={() => handlePlayVideo(lab.id)}
