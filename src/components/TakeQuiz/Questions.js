@@ -299,27 +299,65 @@ const Questions = ({ studentId, courseId, answer, setAnswer }) => {
   useEffect(() => {
     // Timer logic using setInterval to decrement timer every second
     const timerInterval = setInterval(() => {
-      setTime((prevTime) => prevTime - 1);
+      setTime((prevTime) => {
+        if (prevTime <= 1) {
+          setTimerExpired(true);
+          clearInterval(timerInterval); // Stop the timer
+          return 0;
+        }
+        return prevTime - 1;
+      });
     }, 1000);
 
-    // Cleanup function to clear interval when component unmounts or timer reaches zero
+    // Cleanup function to clear interval when component unmounts
     return () => {
       clearInterval(timerInterval);
     };
   }, []);
 
+  // const handleSubmit = useCallback(async () => {
+  //   try {
+  //     // Prepare the answers payload
+  //     const payload = {
+  //       studentId,
+  //       courseId,
+  //       answers: answer.map((ans, index) => ({
+  //         questionId: questions[index].questionId,
+  //         studentAnswer: ans
+  //       }))
+  //     };
+
+  //     // Send the answers to the backend
+  //     const response = await fetch('https://honeybee-becoming-piglet.ngrok-free.app/api/AssignmentQuestion/SubmitAnswers', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(payload),
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error('Failed to submit answers');
+  //     }
+
+  //     // Navigate to the solution page on successful submission
+  //     navigate("/solution");
+  //   } catch (error) {
+  //     console.error('Error submitting answers:', error);
+  //     alert('There was an error submitting your answers. Please try again.');
+  //   }
+  // }, [navigate, answer, studentId, courseId, questions]);
   const handleSubmit = useCallback(() => {
-    navigate("/solution"); // Use navigate to redirect to "/solution" route
-  }, [navigate]);
+        navigate("/solution"); // Use navigate to redirect to "/solution" route
+      }, [navigate]);
+    
 
   useEffect(() => {
     // Check if timer has expired
-    if (time <= 0) {
-      setTimerExpired(true);
-      // Trigger automatic submission when time reaches zero
+    if (timerExpired) {
       handleSubmit();
     }
-  }, [time, handleSubmit]);
+  }, [timerExpired, handleSubmit]);
 
   const handleAnswer = (id, ans) => {
     let temp = [...answer];
@@ -348,39 +386,31 @@ const Questions = ({ studentId, courseId, answer, setAnswer }) => {
   const timePercentage = (time / 15) * 100; // Assuming the initial time is 15 seconds
 
   // Fetch questions from the API
-  // useEffect(() => {
-  //   const fetchQuestions = async () => {
-  //     try {
-  //       const response = await fetch(`/api/AssignmentQuestion/GenerateAssignment/${studentId}/${courseId}`);
-  //       if (!response.ok) {
-  //         throw new Error('Network response was not ok');
-  //       }
-  //       const data = await response.json();
-  //       setQuestions(data);
-  //     } catch (error) {
-  //       console.error('Error fetching questions:', error);
-  //     }
-  //   };
-
-  //   fetchQuestions();
-  // }, [studentId, courseId]);
-   // Fetch questions from the API
-   useEffect(() => {
+  useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await fetch(`/api/AssignmentQuestion/GenerateAssignment/${studentId}/${courseId}`);
+        const response = await fetch(`https://honeybee-becoming-piglet.ngrok-free.app/api/AssignmentQuestion/GenerateAssignment/20240001/is446`);
+
+        // Check if the response is not ok
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error(`Network response was not ok, status: ${response.status}`);
         }
+
+        // Attempt to parse the JSON response
         const data = await response.json();
+
         // Infer question type based on the response data structure
         const formattedQuestions = data.map((q) => ({
           ...q,
           type: q.choiceA && q.choiceB && q.choiceC && q.choiceD ? "mcq" : "essay"
         }));
+
         setQuestions(formattedQuestions);
       } catch (error) {
+        // Log the error to the console
         console.error('Error fetching questions:', error);
+        // Optional: Provide user feedback
+        alert('There was an error fetching the questions. Please try again later.');
       }
     };
 
