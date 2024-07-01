@@ -348,7 +348,24 @@ const Questions = ({ studentId, courseId, answer, setAnswer }) => {
   const timePercentage = (time / 15) * 100; // Assuming the initial time is 15 seconds
 
   // Fetch questions from the API
-  useEffect(() => {
+  // useEffect(() => {
+  //   const fetchQuestions = async () => {
+  //     try {
+  //       const response = await fetch(`/api/AssignmentQuestion/GenerateAssignment/${studentId}/${courseId}`);
+  //       if (!response.ok) {
+  //         throw new Error('Network response was not ok');
+  //       }
+  //       const data = await response.json();
+  //       setQuestions(data);
+  //     } catch (error) {
+  //       console.error('Error fetching questions:', error);
+  //     }
+  //   };
+
+  //   fetchQuestions();
+  // }, [studentId, courseId]);
+   // Fetch questions from the API
+   useEffect(() => {
     const fetchQuestions = async () => {
       try {
         const response = await fetch(`/api/AssignmentQuestion/GenerateAssignment/${studentId}/${courseId}`);
@@ -356,7 +373,12 @@ const Questions = ({ studentId, courseId, answer, setAnswer }) => {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        setQuestions(data);
+        // Infer question type based on the response data structure
+        const formattedQuestions = data.map((q) => ({
+          ...q,
+          type: q.choiceA && q.choiceB && q.choiceC && q.choiceD ? "mcq" : "essay"
+        }));
+        setQuestions(formattedQuestions);
       } catch (error) {
         console.error('Error fetching questions:', error);
       }
