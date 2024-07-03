@@ -20,13 +20,17 @@ import RecordedLabs from "./components/courseMaterials/RecordedLabs/RecordedLabs
 import LectureSlides from "./components/courseMaterials/LectureSlides/LectureSlides";
 import SlideViewerPage from "./components/courseMaterials/LectureSlides/SlideViewerPage";
 import LabSlides from "./components/courseMaterials/LabSlides/LabSlides";
+import AssignmentForm from "./components/takeAssignment/AssignmentForm";
+import AnnouncementsPage from "./components/Announcment/AddAnnouncment";
+import AnnouncementstudentPage from "./components/Announcment/studentAnnouncment";
+
 
 
 
 
 const App = () => {
   const [answer, setAnswer] = useState(Array(question.length).fill(null)); // Initialize with null answers
-  const lectureUrl = 'https://www.example.com/lecture.mp4';
+  // const lectureUrl = 'https://www.example.com/lecture.mp4';
 
   const resetAnswer = () => {
     setAnswer(Array(question.length).fill(null));
@@ -48,7 +52,8 @@ const App = () => {
       );
       setQuestions(newQuestions);
     };
-    const courseId = '123'; // Example courseId, replace with actual logic if needed
+    const courseId = 'is446'; // Example courseId, replace with actual logic if needed
+    const studentId='20240001';
   return (
     <Router>
       <Routes>
@@ -70,9 +75,11 @@ const App = () => {
            <Quiz questions={questions} deleteQuestion={(index) => deleteQuestion(index)} 
            editQuestion={(index, updatedQuestion) => editQuestion(index, updatedQuestion)} />
         </div> } />
-        <Route path="/questions" element={<Questions answer={answer} setAnswer={setAnswer} />} />
+        <Route path="/questions" element={<Questions answer={answer} setAnswer={setAnswer}  studentId={studentId} courseId={courseId}/>} />
         <Route path="/solution" element={<Result answer={answer} resetAnswer={resetAnswer} />} />
-       
+        <Route path="/takeAssignment" element={<AssignmentForm answer={answer} resetAnswer={resetAnswer} />} />
+        <Route path="/addannouncment" element={<AnnouncementsPage  />} />         
+        <Route path="/announcment" element={<AnnouncementstudentPage  />} />         
       </Routes>
     </Router>
   );
