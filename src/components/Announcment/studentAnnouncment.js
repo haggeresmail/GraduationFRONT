@@ -22,29 +22,32 @@ const AnnouncementCard = ({ announcement }) => {
    
     <div className="card">
         
-      <h2><GrAnnounce />{announcement.title}</h2>
-      <p>{announcement.description}</p>
+      <h2><GrAnnounce />{announcement.text}</h2>
+      <h5>{announcement.dateOfAnnouncement}</h5>
+      <p>{announcement.instructorName}</p>
+      
+      
     </div>
     
   );
 };
 
 const AnnouncementstudentPage = () => {
-    // const [announcements, setAnnouncements] = useState([]);
+    const [announcements, setAnnouncements] = useState([]);
   
-    // useEffect(() => {
-    //   const fetchAnnouncements = async () => {
-    //     try {
-    //       const response = await fetch('/api/announcements');
-    //       const data = await response.json();
-    //       setAnnouncements(data);
-    //     } catch (error) {
-    //       console.error('Error fetching announcements:', error);
-    //     }
-    //   };
+    useEffect(() => {
+      const fetchAnnouncements = async () => {
+        try {
+          const response = await fetch('http://learnhub.runasp.net/api/Announcement/is1');
+          const data = await response.json();
+          setAnnouncements(data);
+        } catch (error) {
+          console.error('Error fetching announcements:', error);
+        }
+      };
   
-    //   fetchAnnouncements();
-    // }, []);
+      fetchAnnouncements();
+    }, []);
   
   
         return (
