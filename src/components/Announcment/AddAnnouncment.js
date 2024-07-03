@@ -1,160 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
-import './AddAnnouncment.css'; // Include your CSS file
-
-// const AnnouncementsPage = () => {
-//     const [announcements, setAnnouncements] = useState([]);
-//     const [isEditing, setIsEditing] = useState(null); // Track which announcement is being edited
-//     const [editText, setEditText] = useState(''); // Store edit text
-//     const [newAnnouncement, setNewAnnouncement] = useState(''); // Store new announcement text
-  
-//     useEffect(() => {
-//       // Fetch announcements from the backend
-//       const fetchAnnouncements = async () => {
-//         try {
-//           const response = await axios.get('https://your-backend-api.com/announcements');
-//           setAnnouncements(response.data);
-//         } catch (error) {
-//           console.error('Error fetching announcements:', error);
-//         }
-//       };
-  
-//       fetchAnnouncements();
-//     }, []);
-  
-//     const handleEdit = (id) => {
-//       setIsEditing(id);
-//       const announcement = announcements.find((announcement) => announcement.id === id);
-//       setEditText(announcement.title);
-//     };
-  
-//     const handleEditChange = (e) => {
-//       setEditText(e.target.value);
-//     };
-  
-//     const handleEditSubmit = async (id) => {
-//       try {
-//         const response = await axios.put(`https://your-backend-api.com/announcements/${id}`, {
-//           title: editText,
-//         });
-//         if (response.status === 200) {
-//           setAnnouncements((prev) =>
-//             prev.map((announcement) => (announcement.id === id ? { ...announcement, title: editText } : announcement))
-//           );
-//           setIsEditing(null);
-//           setEditText('');
-//         }
-//       } catch (error) {
-//         console.error('Error editing announcement:', error);
-//       }
-//     };
-  
-//     const handleCopy = async (id) => {
-//       try {
-//         const announcement = announcements.find((announcement) => announcement.id === id);
-//         const response = await axios.post('https://your-backend-api.com/announcements', {
-//           title: `${announcement.title} (copy)`,
-//           postedAt: new Date().toISOString(),
-//           viewers: 0,
-//         });
-//         if (response.status === 201) {
-//           setAnnouncements([...announcements, response.data]);
-//         }
-//       } catch (error) {
-//         console.error('Error copying announcement:', error);
-//       }
-//     };
-  
-//     const handleDelete = async (id) => {
-//       try {
-//         const response = await axios.delete(`https://your-backend-api.com/announcements/${id}`);
-//         if (response.status === 200) {
-//           setAnnouncements((prev) => prev.filter((announcement) => announcement.id !== id));
-//         }
-//       } catch (error) {
-//         console.error('Error deleting announcement:', error);
-//       }
-//     };
-  
-//     const handleAddAnnouncement = async () => {
-//       try {
-//         const response = await axios.post('https://your-backend-api.com/announcements', {
-//           title: newAnnouncement,
-//           postedAt: new Date().toISOString(),
-//           viewers: 0,
-//         });
-//         if (response.status === 201) {
-//           setAnnouncements((prev) => [...prev, response.data]);
-//           setNewAnnouncement('');
-//         }
-//       } catch (error) {
-//         console.error('Error adding announcement:', error);
-//       }
-//     };
-  
-//     return (
-//       <div className="announcements-container">
-//         <h1>Announcements</h1>
-//         <div className="add-announcement">
-//           <input
-//             type="text"
-//             placeholder="New announcement"
-//             value={newAnnouncement}
-//             onChange={(e) => setNewAnnouncement(e.target.value)}
-//           />
-//           <button onClick={handleAddAnnouncement}>Add Announcement</button>
-//         </div>
-//         <table className="announcements-table">
-//           <thead>
-//             <tr>
-//               <th>Announcement</th>
-//               <th>Status</th>
-//               <th>Viewers</th>
-//               <th>Actions</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {announcements.map((announcement) => (
-//               <tr key={announcement.id}>
-//                 <td>
-//                   {isEditing === announcement.id ? (
-//                     <input type="text" value={editText} onChange={handleEditChange} />
-//                   ) : (
-//                     announcement.title
-//                   )}
-//                 </td>
-//                 <td>Posted {new Date(announcement.postedAt).toLocaleString()}</td>
-//                 <td>{announcement.viewers}</td>
-//                 <td>
-//                   {isEditing === announcement.id ? (
-//                     <button onClick={() => handleEditSubmit(announcement.id)}>Save</button>
-//                   ) : (
-//                     <>
-//                       <button onClick={() => handleEdit(announcement.id)}>Edit</button>
-//                       <button onClick={() => handleCopy(announcement.id)}>Copy</button>
-//                       <button onClick={() => handleDelete(announcement.id)}>Delete</button>
-//                     </>
-//                   )}
-//                 </td>
-//               </tr>
-//             ))}
-//           </tbody>
-//         </table>
-//       </div>
-//     );
-//   };
-  
-//   export default AnnouncementsPage;
-
-
-
- // Include your CSS file
-
- 
- 
- 
- 
+import './AddAnnouncment.css'; // Include your CSS file 
  const AnnouncementsPage = () => {
    const [announcements, setAnnouncements] = useState([]);
    const [isEditing, setIsEditing] = useState(null);
@@ -278,6 +125,55 @@ import './AddAnnouncment.css'; // Include your CSS file
 
      }
    }, [announcements]);
+
+//     const handleEditSubmit = async (id) => {
+//       try {
+//         const response = await axios.put(`https://your-backend-api.com/announcements/${id}`, {
+//           title: editText,
+//         });
+//         if (response.status === 200) {
+//           setAnnouncements((prev) =>
+//             prev.map((announcement) => (announcement.id === id ? { ...announcement, title: editText } : announcement))
+//           );
+//           setIsEditing(null);
+//           setEditText('');
+//         }
+//       } catch (error) {
+//         console.error('Error editing announcement:', error);
+//       }
+//     };
+  
+//     const handleCopy = async (id) => {
+//       try {
+//         const announcement = announcements.find((announcement) => announcement.id === id);
+//         const response = await axios.post('https://your-backend-api.com/announcements', {
+//           title: `${announcement.title} (copy)`,
+//           postedAt: new Date().toISOString(),
+//           viewers: 0,
+//         });
+//         if (response.status === 201) {
+//           setAnnouncements([...announcements, response.data]);
+//         }
+//       } catch (error) {
+//         console.error('Error copying announcement:', error);
+//       }
+//     };
+  
+//     const handleDelete = async (id) => {
+//       try {
+//         const response = await axios.delete(`https://your-backend-api.com/announcements/${id}`);
+//         if (response.status === 200) {
+//           setAnnouncements((prev) => prev.filter((announcement) => announcement.id !== id));
+//         }
+//       } catch (error) {
+//         console.error('Error deleting announcement:', error);
+//       }
+//     };
+  
+    
+
+
+   
  
    return (
      <div className="announcements-container">
@@ -324,7 +220,7 @@ import './AddAnnouncment.css'; // Include your CSS file
        <table className="announcements-table">
          <thead>
            <tr>
-             <th>Announcement</th>
+             <th>Announcementtttt</th>
              <th>Posted At</th>
              <th>Viewers</th>
              <th>Actions</th>
