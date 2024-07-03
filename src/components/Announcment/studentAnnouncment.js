@@ -17,13 +17,21 @@ const announcements = [
   // Add more announcements here
 ];
 
+
 const AnnouncementCard = ({ announcement }) => {
+  // Convert ISO date string to a Date object
+  const dateObj = new Date(announcement.dateOfAnnouncement);
+
+  // Format the date in a readable way
+  const formattedDate = `${dateObj.toLocaleDateString()} ${dateObj.toLocaleTimeString()}`;
+
   return (
+    
    
     <div className="card">
         
       <h2><GrAnnounce />{announcement.text}</h2>
-      <h5>{announcement.dateOfAnnouncement}</h5>
+      <h5>{formattedDate}</h5>
       <p>{announcement.instructorName}</p>
       
       
