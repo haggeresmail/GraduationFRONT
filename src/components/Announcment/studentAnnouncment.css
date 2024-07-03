@@ -1,0 +1,77 @@
+.announcements-containers {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .announcements-page ul {
+    list-style-type: none; /* Remove the bullet points from list items */
+    padding: 0;
+    margin: 0;
+  }
+ 
+  
+  .announcements-page li {
+    margin-bottom: 20px;
+    list-style-type: none; /* Remove the bullet points from list items */
+  }
+  
+  .card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer; /* Add a cursor to indicate that the card is draggable */
+    margin-bottom: 30px;
+    width: 800px;
+  }
+  
+  .card h2 {
+    font-weight: bold;
+    margin-top: 0;
+  }
+  
+  .card p {
+    margin-bottom: 20px;
+  }
+  
+  /* Add some hover effects to the cards */
+  .card:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+  }
+  
+  /* Add some styles to the drag handle */
+  .drag-handle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    cursor: grab;
+  }
+  
+  .drag-handle:hover {
+    color: #666;
+  }
+  
+  /* Add some styles to the droppable area */
+  .droppable {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px dashed #ccc;
+    border-radius: 10px;
+  }
+  
+  .droppable.is-dragging-over {
+    background-color: #fff;
+    border-color: #666;
+  }
+  
+  .droppable.is-dragging-over .card {
+    opacity: 0.5;
+  }
