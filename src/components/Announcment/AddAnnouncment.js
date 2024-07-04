@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
 import './AddAnnouncment.css'; // Include your CSS file
-
+Modal.setAppElement('#root'); 
 const AnnouncementsPage = () => {
   const [announcements, setAnnouncements] = useState([]);
   const [isEditing, setIsEditing] = useState(null);
@@ -13,44 +13,41 @@ const AnnouncementsPage = () => {
   const [showTable, setShowTable] = useState(false); // State to control displaying the table
 
   // Function to handle edit initiation
-  const handleEdit = (id, text, instructorName) => {
-    setIsEditing(id);
-    setEditText(text);
-    setEditInstructorName(instructorName);
-  };
+ // Function to handle edit initiation
+ const handleEdit = (id, text) => {
+  setIsEditing(id);
+  setEditText(text);
+};
 
-  // Function to handle text edit changes
-  const handleEditTextChange = (e) => {
-    setEditText(e.target.value);
-  };
-
-  // Function to handle instructor name edit changes
-  const handleEditInstructorNameChange = (e) => {
-    setEditInstructorName(e.target.value);
-  };
+// Function to handle text edit changes
+const handleEditTextChange = (e) => {
+  setEditText(e.target.value);
+};
 
   // Function to submit edits
   const handleEditSubmit = async (id) => {
     try {
-      const response = await axios.put(`http://learnhub.runasp.net/api/Announcement`, {
+      const response = await axios.put(`https://learnhub.runasp.net/api/Announcement/${id}`, {
         text: editText,
-        instructorName: editInstructorName,
-        
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
       if (response.status === 200) {
         setAnnouncements((prev) =>
           prev.map((announcement) =>
-            announcement.id === id ? { ...announcement, text: editText, instructorName: editInstructorName } : announcement
+            announcement.id === id ? { ...announcement, text: editText } : announcement
           )
         );
         setIsEditing(null);
         setEditText('');
-        setEditInstructorName('');
       }
     } catch (error) {
       console.error('Error editing announcement:', error);
     }
   };
+  
 
   // Function to handle adding a new announcement
   const handleAddAnnouncement = async () => {
@@ -86,9 +83,10 @@ const AnnouncementsPage = () => {
   };
 
   // Function to handle deleting an announcement
+
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(`https://your-backend-api.com/announcements/${id}`);
+      const response = await axios.delete(`https://learnhub.runasp.net/api/Announcement/${id}`);
       if (response.status === 200) {
         setAnnouncements((prev) => prev.filter((announcement) => announcement.id !== id));
       }
@@ -200,18 +198,7 @@ const AnnouncementsPage = () => {
                     announcement.text
                   )}
                 </td>
-                <td>
-                  {isEditing === announcement.id ? (
-                    <input
-                      type="text"
-                      value={editInstructorName}
-                      onChange={handleEditInstructorNameChange}
-                      placeholder="Enter instructor name..."
-                    />
-                  ) : (
-                    announcement.instructorName
-                  )}
-                </td>
+                <td>{announcement.instructorName}</td>
                 <td>{new Date(announcement.dateOfAnnouncement).toLocaleString()}</td>
                 <td>
                   {isEditing === announcement.id ? (
@@ -224,7 +211,7 @@ const AnnouncementsPage = () => {
                       </button>
                     </>
                   ) : (
-                    <button className="action" onClick={() => handleEdit(announcement.id, announcement.text, announcement.instructorName)}>
+                    <button className="action" onClick={() => handleEdit(announcement.id, announcement.text)}>
                       Edit
                     </button>
                   )}
