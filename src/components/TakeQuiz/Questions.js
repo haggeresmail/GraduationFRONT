@@ -1,5 +1,3 @@
-
-//******************************************************************************************************** */
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import QuestionComp from "./QuestionComp";
@@ -112,6 +110,10 @@ const Questions = ({ studentId, courseId, assignmentId, answer, setAnswer, quest
   };
 
   const handleIncrement = () => {
+    // if (!selectedOptions[questions[number].questionId]) {
+    //   alert("Please select an answer before proceeding to the next question.");
+    //   return;
+    // }
     if (number === questions.length - 1) {
       setShow(false); // Hide submit button when on last question
     }

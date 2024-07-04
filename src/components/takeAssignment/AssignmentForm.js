@@ -1,4 +1,4 @@
-import React, { useState, useEffect , useCallback} from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import QuestionComp from './QuestionCompAss'; // Assuming QuestionComp is correctly implemented
 import axios from 'axios';
 import "./assignmentform.css";
@@ -27,6 +27,14 @@ const AssignmentForm = ({ studentId, courseId, assignmentId }) => {
   };
 
   const handleSubmit = useCallback(async () => {
+    // Check if any question is not answered
+    const unansweredQuestions = answers.some((answer) => !answer.studentAnswer);
+
+    if (unansweredQuestions) {
+      // alert('Please answer all questions before submitting.');
+      return; // Prevent submission
+    }
+
     navigate("/solution");
 
     try {
@@ -44,7 +52,8 @@ const AssignmentForm = ({ studentId, courseId, assignmentId }) => {
           studentAnswer: selectedOptions[question.questionId] || "", // Use selectedOptions here
         })),
       };
-      // console.log('Payload:', payload); // Log the payload to the console
+
+      // Log the payload to the console as JSON
       console.log('Payload:', JSON.stringify(payload, null, 2));
 
       const response = await axios.post(
@@ -56,13 +65,15 @@ const AssignmentForm = ({ studentId, courseId, assignmentId }) => {
           },
         }
       );
-      console.log('Response:', response); 
+
+      console.log('Response:', response);
+
       if (response.status === 200) {
         navigate('/solution');
       } else {
         throw new Error('Failed to submit answers');
       }
-     } catch (error) {
+    } catch (error) {
       if (error.response) {
         console.error('Server responded with error:', error.response.data);
         console.error('Status code:', error.response.status);
@@ -73,8 +84,7 @@ const AssignmentForm = ({ studentId, courseId, assignmentId }) => {
         console.error('Error setting up request:', error.message);
       }
     }
-    
-  }, [navigate, studentId, courseId, assignmentId, selectedOptions, questions]);
+  }, [navigate, studentId, courseId, assignmentId, selectedOptions, questions, answers]);
 
   // Fetch questions from backend upon component mount
   useEffect(() => {
