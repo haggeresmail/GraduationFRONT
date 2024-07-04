@@ -46,7 +46,7 @@ const AnnouncementstudentPage = () => {
     useEffect(() => {
       const fetchAnnouncements = async () => {
         try {
-          const response = await fetch('http://learnhub.runasp.net/api/Announcement/is1');
+          const response = await fetch('https://learnhub.runasp.net/api/Announcement/is1');
           const data = await response.json();
           setAnnouncements(data);
         } catch (error) {

@@ -181,7 +181,7 @@ const AssignmentForm = ({ studentId, courseId }) => {
   
       console.log('Payload:', payload); // Log payload to verify courseId
   
-      const response = await axios.post('http://learnhub.runasp.net/api/AssignmentQuestion/UploadAssignment', payload, {
+      const response = await axios.post('https://learnhub.runasp.net/api/AssignmentQuestion/UploadAssignment', payload, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -209,7 +209,7 @@ const AssignmentForm = ({ studentId, courseId }) => {
     const fetchQuestions = async () => {
       try {
         const response = await axios.get(
-          `http://learnhub.runasp.net/api/AssignmentQuestion/GenerateAssignment/20240001/is1`,
+          `https://learnhub.runasp.net/api/AssignmentQuestion/GenerateAssignment/20240001/is1`,
           {
             headers: {
               'Content-Type': 'application/json',

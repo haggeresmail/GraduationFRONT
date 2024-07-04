@@ -60,7 +60,7 @@ const AnnouncementsPage = () => {
     }
 
     try {
-      const response = await axios.post('http://learnhub.runasp.net/api/Announcement', {
+      const response = await axios.post('https://learnhub.runasp.net/api/Announcement', {
         text: newAnnouncement.text,
         instructorId: newAnnouncement.instructorId,
         courseId: newAnnouncement.courseId,
@@ -110,7 +110,7 @@ const AnnouncementsPage = () => {
   // Function to fetch announcements and show the table
   const handleShowTable = async () => {
     try {
-      const response = await axios.get('http://learnhub.runasp.net/api/Announcement/is1');
+      const response = await axios.get('https://learnhub.runasp.net/api/Announcement/is1');
       setAnnouncements(response.data); // Set fetched announcements directly
       setShowTable(true); // Show the table after fetching announcements
     } catch (error) {

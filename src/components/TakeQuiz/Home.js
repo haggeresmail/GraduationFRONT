@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import "./takequiz.css";ss
+import "./takequiz.css";
 const Home = () => {
   return (
     <div className="container welcome_box">
