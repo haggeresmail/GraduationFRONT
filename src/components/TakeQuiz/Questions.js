@@ -59,6 +59,8 @@ const Questions = ({ studentId, courseId, assignmentId, answer, setAnswer, quest
           studentAnswer: selectedOptions[question.questionId] || "", // Use selectedOptions here
         })),
       };
+      // console.log('Payload:', payload); // Log the payload to the console
+      console.log('Payload:', JSON.stringify(payload, null, 2));
 
       const response = await axios.post(
         'https://learnhub.runasp.net/api/AssignmentQuestion/UploadAssignment',
@@ -69,7 +71,7 @@ const Questions = ({ studentId, courseId, assignmentId, answer, setAnswer, quest
           },
         }
       );
-
+      console.log('Response:', response); 
       if (response.status === 200) {
         navigate('/solution');
       } else {
