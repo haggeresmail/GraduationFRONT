@@ -121,10 +121,10 @@ const AnnouncementsPage = () => {
   return (
     <div className="announcements-container">
       <h1>Announcements</h1>
-      <button onClick={openModal}>Add Announcement</button>
+      <button  className="annButton"  onClick={openModal}>Add Announcement</button>
 
       {/* Button to show table */}
-      <button onClick={handleShowTable}>Show Announcements</button>
+      <button  className="annButton" onClick={handleShowTable}>Show Announcements</button>
 
       {/* Modal for adding new announcement */}
       <Modal
