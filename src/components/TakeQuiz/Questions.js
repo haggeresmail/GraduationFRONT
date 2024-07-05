@@ -6,10 +6,11 @@ import axios from "axios";
 const Questions = ({ studentId, courseId, assignmentId, answer, setAnswer, questions }) => {
   const [number, setNumber] = useState(0);
   const [show, setShow] = useState(true);
-  const [time, setTime] = useState(15); // Initial time in seconds
+  const [time, setTime] = useState(0); // Initial time in seconds
   const [timerExpired, setTimerExpired] = useState(false);
   const navigate = useNavigate(); // Initialize useNavigate
   const [selectedOptions, setSelectedOptions] = useState({});
+  const totalDurationInSeconds = 7 * 60; // Set your total time in seconds (7 minutes)
 
   const resetAnswer = useCallback(() => {
     setAnswer(Array(questions.length).fill(null)); // Reset answers to an array of nulls
@@ -21,7 +22,27 @@ const Questions = ({ studentId, courseId, assignmentId, answer, setAnswer, quest
   }, [resetAnswer]);
 
   useEffect(() => {
-    // Timer logic using setInterval to decrement timer every second
+    const fetchAssignmentDetails = async () => {
+      try {
+        const response = await axios.get(`https://learnhub.runasp.net/api/Assignment/2`);
+        const data = response.data;
+         const startDate = new Date(data.assignmentConfig.startDate);
+        const endDate = new Date(data.assignmentConfig.endDate);
+
+        // const startDate = new Date("2024-07-03T18:23:40.165");
+        // const endDate = new Date("2024-07-03T18:30:41.165");
+
+        const durationInSeconds = Math.floor((endDate - startDate) / 1000);
+        setTime(durationInSeconds);
+      } catch (error) {
+        console.error('Error fetching assignment details:', error);
+      }
+    };
+
+    fetchAssignmentDetails();
+  }, []);
+
+  useEffect(() => {
     const timerInterval = setInterval(() => {
       setTime((prevTime) => {
         if (prevTime <= 1) {
@@ -33,7 +54,6 @@ const Questions = ({ studentId, courseId, assignmentId, answer, setAnswer, quest
       });
     }, 1000);
 
-    // Cleanup function to clear interval when component unmounts
     return () => {
       clearInterval(timerInterval);
     };
@@ -43,7 +63,6 @@ const Questions = ({ studentId, courseId, assignmentId, answer, setAnswer, quest
     navigate("/solution");
 
     try {
-      // Prepare payload and send request
       const payload = {
         studentId: studentId,
         courseId: courseId,
@@ -57,7 +76,6 @@ const Questions = ({ studentId, courseId, assignmentId, answer, setAnswer, quest
           studentAnswer: selectedOptions[question.questionId] || "", // Use selectedOptions here
         })),
       };
-      // console.log('Payload:', payload); // Log the payload to the console
       console.log('Payload:', JSON.stringify(payload, null, 2));
 
       const response = await axios.post(
@@ -90,7 +108,6 @@ const Questions = ({ studentId, courseId, assignmentId, answer, setAnswer, quest
   }, [navigate, studentId, courseId, assignmentId, selectedOptions, questions]);
 
   useEffect(() => {
-    // Check if timer has expired
     if (timerExpired) {
       handleSubmit();
     }
@@ -102,7 +119,6 @@ const Questions = ({ studentId, courseId, assignmentId, answer, setAnswer, quest
       [questionId]: choice,
     }));
 
-    // Update the answer state as well if needed
     setAnswer((prevAnswer) => ({
       ...prevAnswer,
       [questionId]: choice,
@@ -110,28 +126,22 @@ const Questions = ({ studentId, courseId, assignmentId, answer, setAnswer, quest
   };
 
   const handleIncrement = () => {
-    // if (!selectedOptions[questions[number].questionId]) {
-    //   alert("Please select an answer before proceeding to the next question.");
-    //   return;
-    // }
     if (number === questions.length - 1) {
-      setShow(false); // Hide submit button when on last question
+      setShow(false);
     }
     setNumber((prevNumber) => Math.min(prevNumber + 1, questions.length - 1));
   };
 
   const handleDecrement = () => {
     if (number === 0) {
-      return; // Already at the first question, do nothing
+      return;
     }
     setNumber((prevNumber) => Math.max(prevNumber - 1, 0));
   };
 
-  // Define the threshold for the color change
-  const nearEndTime = 5; // Change this value to set the threshold
+  const nearEndTime = 5;
 
-  // Calculate the percentage of time remaining
-  const timePercentage = (time / 15) * 100; // Assuming the initial time is 15 seconds
+  const timePercentage = (time / totalDurationInSeconds) * 100;
 
   return (
     <div className="container mb-5">

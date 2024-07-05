@@ -9,18 +9,18 @@ const Home = () => {
         <Link to="/questions">
           <button className="startquiz" >Start the Quiz</button>
         </Link>
-        <Link to="/CourseMaterials">
+        {/* <Link to="/CourseMaterials">
           <button  className="startquiz">CourseMaterials</button>
-        </Link>
-        <Link to="/Upload">
+        </Link> */}
+        {/* <Link to="/Upload">
           <button className="startquiz">Upload</button>
-        </Link>
+        </Link> */}
         <Link to="/takeAssignment">
           <button className="startquiz">takeAssignment</button>
         </Link>
-        <Link to="/addannouncment">
+        {/* <Link to="/addannouncment">
           <button className="startquiz">add announcment</button>
-        </Link>
+        </Link> */}
         <Link to="/announcment">
           <button className="startquiz">announcments</button>
         </Link>
