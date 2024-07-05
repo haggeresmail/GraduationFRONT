@@ -24,6 +24,13 @@ import AssignmentForm from "./components/takeAssignment/AssignmentForm";
 import AnnouncementsPage from "./components/Announcment/AddAnnouncment";
 import AnnouncementstudentPage from "./components/Announcment/studentAnnouncment";
 import axios from "axios";
+import Modal from 'react-modal';
+
+// Set the main application element
+// Modal.setAppElement('#root'); // or whatever your main app element ID is
+
+// Then render your app as usual
+// ReactDOM.render(<App />, document.getElementById('root'));
 
 
 
@@ -56,6 +63,7 @@ const App = () => {
     const [answer, setAnswer] = useState(Array(0).fill(null));
     const courseId = 'is1'; 
     const studentId='20240001';
+    const assignmentId='2';
     useEffect(() => {
       const fetchQuestions = async () => {
         try {
@@ -114,7 +122,7 @@ const App = () => {
            {/* <Quiz questions={questions} deleteQuestion={(index) => deleteQuestion(index)} 
            editQuestion={(index, updatedQuestion) => editQuestion(index, updatedQuestion)} />
         </div> } /> */}
-        <Route path="/questions" element={<Questions answer={answer} setAnswer={setAnswer}  questions={questions}  studentId={studentId} courseId={courseId}/>} />
+        <Route path="/questions" element={<Questions answer={answer} setAnswer={setAnswer}  questions={questions} assignmentId={assignmentId} studentId={studentId} courseId={courseId}/>} />
         <Route path="/solution" element={<Result answer={answer} resetAnswer={resetAnswer} />} />
         <Route path="/takeAssignment" element={<AssignmentForm answer={answer} resetAnswer={resetAnswer} />} />
         <Route path="/addannouncment" element={<AnnouncementsPage  />} />         

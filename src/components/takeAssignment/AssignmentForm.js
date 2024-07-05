@@ -107,10 +107,11 @@ const AssignmentForm = ({ studentId, courseId, assignmentId }) => {
 
         // Determine the type of each question
         const processedQuestions = data.map((question) => {
-          const type = question.hasOwnProperty('choiceA') && question.hasOwnProperty('choiceB') ? 'mcq' : 'essay';
+          // const type = question.hasOwnProperty('choiceA') && question.hasOwnProperty('choiceB') ? 'mcq' : 'essay';
           return {
             ...question,
-            type: type,
+            // type: type,
+             type: question.choiceA && question.choiceB && question.choiceC && question.choiceD ? "mcq" : "essay"
           };
         });
 
